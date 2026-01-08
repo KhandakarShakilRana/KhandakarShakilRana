@@ -1,4 +1,4 @@
-name: Generate Pacman Contribution Graph
+name: Generate Contribution Graph
 
 on:
   schedule:
@@ -6,15 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate Pacman SVG
-        uses: abozanona/pacman-contribution-graph-action@main
+      - name: Generate contribution graph
+        uses: Platane/snk@v3
         with:
           github_user_name: KhandakarShakilRana
+          outputs: |
+            dist/pacman-contribution-graph.svg
+            dist/pacman-contribution-graph-dark.svg?palette=github-dark
 
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
